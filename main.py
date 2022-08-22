@@ -98,17 +98,17 @@ def get_birthday(birthday, year, today):
     return birth_day
 
 
-def get_ciba():
-    url = "http://open.iciba.com/dsapi/"
-    headers = {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
-    }
-    r = get(url, headers=headers)
-    note_en = r.json()["content"]
-    note_ch = r.json()["note"]
-    return note_ch, note_en
+# def get_ciba():
+#     url = "http://open.iciba.com/dsapi/"
+#     headers = {
+#         'Content-Type': 'application/json',
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+#                       'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
+#     }
+#     r = get(url, headers=headers)
+#     note_en = r.json()["content"]
+#     note_ch = r.json()["note"]
+#     return note_ch, note_en
 
 
 def send_message(to_user, access_token, city_name, weather, max_temperature, min_temperature, note_ch, note_en):
@@ -219,7 +219,7 @@ if __name__ == "__main__":
     province, city = config["province"], config["city"]
     weather, max_temperature, min_temperature = get_weather(province, city)
     # 获取词霸每日金句
-    note_ch, note_en = get_ciba()
+    # note_ch, note_en = get_ciba()
     # 公众号推送消息
     for user in users:
         send_message(user, accessToken, city, weather, max_temperature, min_temperature, note_ch, note_en)
