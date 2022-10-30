@@ -20,7 +20,7 @@ def get_yunshi():
     color=r.json()["color"]
     health=r.json()["health"]
     love=r.json()['love']
-    work=r.jsom()['work']
+    work=r.json()['work']
     money=r.json()['money']
     luckynumber=r.json()['number']
     summary=r.json()['summary']
