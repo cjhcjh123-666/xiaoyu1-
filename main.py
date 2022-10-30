@@ -129,7 +129,7 @@ def get_ciba():
     return note_ch, note_en
 
 
-def send_message(to_user, access_token, city_name, weather, max_temperature, min_temperature, note_ch, note_en):
+def send_message(to_user, access_token, city_name, weather, max_temperature, min_temperature, note_ch, note_en,dateno,name,color,health,love,work,money,luckynumber,summary,all):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
     year = localtime().tm_year
@@ -186,7 +186,48 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
             "note_ch": {
                 "value": note_ch,
                 "color": get_color()
-            }
+            },
+            #dateno,name,color,health,love,work,money,luckynumber,summary,all
+            "dateno":{
+                "value":"今天是{}".format(dateno),
+                "color":get_color()
+            },
+            "name":{
+                "value":"星座：{}".format(name),
+                "color":get_color()
+            },
+            "color":{
+                "value":"幸运色：{}".format(color),
+                "color":get_color()
+            },
+            "health":{
+                "value":"健康指数：{}%".format(health),
+                "color":get_color()
+            },
+            "love":{
+                "value":"爱情指数：{}%".format(love),
+                "color":get_color()
+            },
+            "work":{
+                "value":"工作指数：{}%".format(work),
+                "color":get_color()
+            },
+            "money":{
+                "value":"财运指数：{}%".format(money),
+                "color":get_color()
+            },
+            "luckynumber":{
+                "value":"幸运数：{}".format(luckynumber),
+                "color":get_color()
+            },
+            "summary":{
+                "value":"小结:{}".format(summary),
+                "color":get_color()
+            },
+            "all":{
+                "value":"总体指数：{}%".format(all),
+                "color":get_color()
+            },
         }
     }
     for key, value in birthdays.items():
