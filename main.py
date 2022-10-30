@@ -1,3 +1,4 @@
+# coding:utf-8
 import random
 from time import time, localtime
 import cityinfo
@@ -6,8 +7,25 @@ from datetime import datetime, date
 from zhdate import ZhDate
 import sys
 import os
-
-
+def get_yunshi():
+    url="http://web.juhe.cn/constellation/getAll?consName=狮子座&type=today&key=986aa172ee159aa7558d8d7cf046e162"
+    headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
+    }
+    r = get(url, headers=headers)
+    print(r.text)
+    dateno=r.json()["date"]
+    name = r.json()["name"]
+    color=r.json()["color"]
+    health=r.json()["health"]
+    love=r.json()['love']
+    work=r.jsom()['work']
+    money=r.json()['money']
+    luckynumber=r.json()['number']
+    summary=r.json()['summary']
+    all=r.json()['all']
+    return dateno,name,color,health,love,work,money,luckynumber,summary,all
 def get_color():
     # 获取随机颜色
     get_colors = lambda n: list(map(lambda i: "#" + "%06x" % random.randint(0, 0xFFFFFF), range(n)))
@@ -220,7 +238,9 @@ if __name__ == "__main__":
     weather, max_temperature, min_temperature = get_weather(province, city)
     # 获取词霸每日金句
     note_ch, note_en = get_ciba()
+    # 获取今日运势
+    dateno, name, color, health, love, work, money, luckynumber, summary, all=get_yunshi()
     # 公众号推送消息
     for user in users:
-        send_message(user, accessToken, city, weather, max_temperature, min_temperature, note_ch, note_en)
+        send_message(user, accessToken, city, weather, max_temperature, min_temperature, note_ch, note_en,dateno,name,color,health,love,work,money,luckynumber,summary,all)
     os.system("pause")
